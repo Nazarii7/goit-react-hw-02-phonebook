@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
+// import { nanoid } from 'nanoid';
 
 class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    // contacts: [
+    //   { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+    //   { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+    //   { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+    //   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    // ],
     name: '',
     number: '',
   };
@@ -20,6 +21,13 @@ class App extends Component {
 
   hendleSubmit = e => {
     e.preventDefault();
+    let contactUsers = { name: this.state.name, number: this.state.number };
+    this.props.onSubmitData(contactUsers);
+    this.reset();
+  };
+
+  reset = () => {
+    this.setState({ name: '', number: '' });
   };
 
   render() {
@@ -27,7 +35,7 @@ class App extends Component {
       <div>
         <h1>Phonebook</h1>
         <form onSubmit={this.hendleSubmit}>
-          <label htmlFor={this.nameInputId}>
+          <label>
             <span>Name</span>
             <input
               type="text"
@@ -36,11 +44,10 @@ class App extends Component {
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
               value={this.state.name}
               onChange={this.handleChange}
-              id={this.nameInputId}
               required
             />
           </label>
-          <label htmlFor={this.numberInputID}>
+          <label>
             <span>Number</span>
             <input
               type="tel"
@@ -49,21 +56,24 @@ class App extends Component {
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
               value={this.state.number}
               onChange={this.handleChange}
-              id={this.numberInputID}
               required
             />
           </label>
           <button type="submit">Add contact</button>
         </form>
-        <h1>Contacts</h1>
+        {/* <h1>Contacts</h1>
         <ul>
           <li>Rosie Simpson: 645-17-79</li>
           <li>Hermione Kline: 443-89-12</li>
           <li>Eden Clements: 459-12-56</li>
-        </ul>
+        </ul> */}
       </div>
     );
   }
 }
+
+App.propTypes = {
+  onSubmitData: PropTypes.func,
+};
 
 export default App;
