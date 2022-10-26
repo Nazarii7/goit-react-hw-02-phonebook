@@ -26,10 +26,11 @@ class App extends Component {
   };
 
   render() {
+    const { contacts } = this.state;
     return (
       <div>
         <h1>Phonebook</h1>
-        <Form onAddContact={this.addContact} />
+        <Form contacts={contacts} onAddContact={this.addContact} />
 
         <h2>Contacts</h2>
       </div>

@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import shortid from 'shortid';
 
 class Form extends Component {
   state = {
     name: '',
+    number: '',
   };
-
-  nameInputID = shortid.generate();
 
   hendleChange = event => {
     const { name, value } = event.currentTarget;
@@ -16,19 +14,18 @@ class Form extends Component {
   hendleSubmit = event => {
     event.preventDefault();
 
-    this.props.onSubmit(this.state);
     this.reset();
   };
 
   reset = () => {
-    this.setState({ name: '' });
+    this.setState({ name: '', number: '' });
   };
 
   render() {
-    const { name } = this.state;
+    const { name, number } = this.state;
     return (
       <form onSubmit={this.hendleSubmit}>
-        <label htmlFor={this.nameInputID}>
+        <label>
           Name
           <input
             type="text"
@@ -37,11 +34,22 @@ class Form extends Component {
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             value={name}
             onChange={this.hendleChange}
-            id={this.nameInputID}
             required
           />
         </label>
-        <button type="button">Add contact</button>
+        <label>
+          Number
+          <input
+            type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            value={number}
+            onChange={this.hendleChange}
+            required
+          />
+        </label>
+        <button type="submit">Add contact</button>
       </form>
     );
   }
