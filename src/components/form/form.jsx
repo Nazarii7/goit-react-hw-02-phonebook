@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 class Form extends Component {
   state = {
     name: '',
-    number: '',
   };
 
   hendleChange = event => {
@@ -14,19 +13,25 @@ class Form extends Component {
   hendleSubmit = event => {
     event.preventDefault();
 
+    const { name } = this.state;
+    const { onSubmit } = this.props;
+
+    onSubmit(name);
+    this.setState({ name: '' });
+
     this.reset();
   };
 
   reset = () => {
-    this.setState({ name: '', number: '' });
+    this.setState({ name: '' });
   };
 
   render() {
-    const { name, number } = this.state;
+    const { name } = this.state;
     return (
       <form onSubmit={this.hendleSubmit}>
+        <h3>Name</h3>
         <label>
-          Name
           <input
             type="text"
             name="name"
@@ -37,8 +42,8 @@ class Form extends Component {
             required
           />
         </label>
+        {/* <h3>Number</h3>
         <label>
-          Number
           <input
             type="tel"
             name="number"
@@ -48,7 +53,7 @@ class Form extends Component {
             onChange={this.hendleChange}
             required
           />
-        </label>
+        </label> */}
         <button type="submit">Add contact</button>
       </form>
     );
