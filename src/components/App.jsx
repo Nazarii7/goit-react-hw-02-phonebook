@@ -53,7 +53,17 @@ class App extends Component {
   render() {
     const { filter } = this.state;
     return (
-      <div>
+      <div
+        style={{
+          width: '1000px',
+          margin: '0 auto',
+          padding: '0 50px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          backgroundColor: 'antiquewhite',
+        }}
+      >
         <h1>Phonebook</h1>
         <Form onSubmit={this.addContact} />
         <h2>Contacts</h2>

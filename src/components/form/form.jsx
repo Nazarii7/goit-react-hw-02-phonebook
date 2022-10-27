@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import css from './form.module.css';
 
 class Form extends Component {
   state = {
@@ -29,11 +30,12 @@ class Form extends Component {
   render() {
     const { name, number } = this.state;
     return (
-      <form onSubmit={this.hendleSubmit}>
+      <form className={css.form} onSubmit={this.hendleSubmit}>
         <h3>Name</h3>
         <label>
           <input
             type="text"
+            className={css.input}
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
@@ -46,6 +48,7 @@ class Form extends Component {
         <label>
           <input
             type="tel"
+            className={css.input}
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
@@ -54,7 +57,9 @@ class Form extends Component {
             required
           />
         </label>
-        <button type="submit">Add contact</button>
+        <button type="submit" className={css.button}>
+          Add contact
+        </button>
       </form>
     );
   }
