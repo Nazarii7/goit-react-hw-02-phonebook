@@ -1,21 +1,40 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { PropTypes } from 'prop-types';
 
-const ContactList = ({ contacts }) => (
-  <ul>
-    {contacts.map(({ id, name }) => (
-      <li key={id}>
-        <p>{name}</p>
-      </li>
-    ))}
-  </ul>
-);
+const ContactList = ({ filteredContacts, onRemove }) => {
+  return (
+    filteredContacts.length > 0 && (
+      <ul>
+        {filteredContacts.map(({ id, name, number }) => {
+          return (
+            <li key={id}>
+              <span>{name}:</span>
+              <span>{number}</span>
+              <button onClick={() => onRemove(id)}>Delete</button>
+            </li>
+          );
+        })}
+      </ul>
+    )
+  );
+};
 
 ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
+  states: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+};
+
+ContactList.propTypes = {
+  filteredContacts: PropTypes.arrayOf(
+    PropTypes.exact({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
     })
   ),
 };
