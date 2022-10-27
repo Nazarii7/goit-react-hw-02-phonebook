@@ -16,7 +16,6 @@ class Form extends Component {
 
     const { name, number } = this.state;
     const { onSubmit } = this.props;
-
     onSubmit(name, number);
     this.setState({ name: '', number: '' });
 

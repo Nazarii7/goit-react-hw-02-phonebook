@@ -23,8 +23,6 @@ class App extends Component {
       number,
     };
 
-    console.log(newContact);
-
     if (this.state.contacts.some(contact => contact.name === newContact.name)) {
       alert(`${newContact.name} is already is contacts`);
       return false;
@@ -58,7 +56,6 @@ class App extends Component {
       <div>
         <h1>Phonebook</h1>
         <Form onSubmit={this.addContact} />
-
         <h2>Contacts</h2>
         <div>
           <Filter value={filter} onChange={this.changeFilter} />
